@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_diet_tips/Appetotor/Provider/Getuserdata.dart';
 import 'package:flutter_diet_tips/Appetotor/Screens/Home/TabDiet.dart';
+import 'package:flutter_diet_tips/CreatePlanPage.dart';
 import 'package:flutter_diet_tips/util/ConstantData.dart';
 import 'package:geocode/geocode.dart';
 import 'package:geolocator/geolocator.dart';
@@ -170,9 +171,13 @@ class _MapIntegrationState extends State<MapIntegration> {
           onTap: () async {
             useradress == ""
                 ? loaddata()
-                : Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return TabDiet((i) {});
+                : 
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CreatePlanPage();
                   }));
+                // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                //     return TabDiet((i) {});
+                //   }));
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),

@@ -1,10 +1,17 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_diet_tips/Appetotor/ApiModel/packageModel.dart';
 import 'package:flutter_diet_tips/Appetotor/Config/api_Service.dart';
+import 'package:flutter_diet_tips/Appetotor/Screens/Dynamic/dynamicScreen.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../Config/config.dart';
+import '../../customWidget/utils.dart';
 class Packages extends StatefulWidget {
   const Packages({super.key});
 
@@ -14,6 +21,7 @@ class Packages extends StatefulWidget {
 
 class _PackagesState extends State<Packages> {
   CallApi apiService = CallApi();
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +66,7 @@ class _PackagesState extends State<Packages> {
               title: e.name.toString(),
               duration: e.detail.toString(),
               details: e.detail.toString(),
+              e: e,
             ); 
           }).toList());
         });
@@ -69,7 +78,8 @@ class packages extends StatefulWidget {
   String price;
   String duration;
   String details;
-  packages({Key? key,required this.price,required this.title,required this.details,required this.duration}) : super(key: key);
+  Datum e;
+  packages({Key? key,required this.e,required this.price,required this.title,required this.details,required this.duration}) : super(key: key);
 
   @override
   State<packages> createState() => _packagesState();
@@ -129,7 +139,7 @@ class _packagesState extends State<packages> {
               Spacer(),
               GestureDetector(
                 onTap: (){
-                  makePayment(widget.price,"s");
+                  makePayment(widget.price,"s",widget.e.id.toString(),widget.e);
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width,
@@ -157,7 +167,7 @@ class _packagesState extends State<packages> {
     );
 
   }
-  Future<void> makePayment(String ammount,String qID) async {
+  Future<void> makePayment(String ammount,String qID,String packageId,Datum e) async {
     try {
       paymentIntent = await createPaymentIntent(ammount, 'PKR');
       //Payment Sheet
@@ -175,15 +185,63 @@ class _packagesState extends State<packages> {
 
       ///now finally display payment sheeet
 
-      displayPaymentSheet(qID);
+      displayPaymentSheet(qID,packageId,e);
       //deleteData(qID);
     } catch (e, s) {
       print('exception:$e$s');
     }
   }
 
+  Future AddWallet(String Pakage_id,Datum e) async {
+    SharedPreferences? LocalStorage;
+    var now = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String formattedDate = formatter.format(now);
+     //
+    DateTime date=DateTime.parse(formattedDate);
+    String user_id=LocalStorage
+        ?.getString('id')
+        .toString() ??
+        '1';
+    print("user id data: "+user_id);
+    print("Pacakge id:"+Pakage_id);
+    Map data = {
+      'user_id': int.parse(user_id),
+      'package_id':int.parse(Pakage_id),
+      'price': e.price?.toDouble(),
+      'remaining_amount': e.price?.toDouble(),
+      'start_date': date,
+      'end_date': date,
+      'created_at': e.createdAt,
+      'updated_at': e.updatedAt,
+    };
 
-  displayPaymentSheet(String qID) async {
+    http.Response response = await http
+        .post(
+      Uri.parse(Config.Base_Url + '/subscription/data'),
+      body: data,
+    )
+        .whenComplete(() {
+      setState(() {
+        //_isInAsyncCall = false;
+      });
+    });
+
+    var responsedata = response.body;
+    print("check responce: "+response.body);
+    log("check responce: "+response.body);
+    if (response.statusCode == 200) {
+      Utils.flushSucessMessages("Succesfully registered", context);
+
+      print("check responce: "+response.body);
+      log("check responce: "+response.body);
+
+    } else {
+      Utils.flushBarErrorMessages("Failed! Try Again", context);
+    }
+  }
+
+  displayPaymentSheet(String qID,String packageId,Datum e) async {
     try {
       await Stripe.instance.presentPaymentSheet().then((value) {
         showDialog(
@@ -204,6 +262,12 @@ class _packagesState extends State<packages> {
                 ],
               ),
             ));
+        AddWallet(packageId,e).whenComplete(() {
+          Navigator.push(context, MaterialPageRoute(builder: (context){
+            return HomePage();
+          }));
+        });
+
         // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("paid successfully")));
 
         paymentIntent = null;
@@ -218,8 +282,8 @@ class _packagesState extends State<packages> {
                   Row(
                     children: const [
                       Icon(
-                        Icons.check_circle,
-                        color: Colors.green,
+                        Icons.add_circle_outline_outlined,
+                        color: Colors.red,
                       ),
                       Text("Cancelled"),
                     ],

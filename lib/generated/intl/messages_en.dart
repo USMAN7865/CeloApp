@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bmi": MessageLookupByLibrary.simpleMessage("BMI"),
         "bmiCalculator": MessageLookupByLibrary.simpleMessage("BMI Calculator"),
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
+        "createaccount": MessageLookupByLibrary.simpleMessage("Create Account"),
         "cm": MessageLookupByLibrary.simpleMessage("cm"),
         "continueText": MessageLookupByLibrary.simpleMessage("Continue"),
         "daysDiet": MessageLookupByLibrary.simpleMessage("7 Days Diet"),
@@ -34,9 +35,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "dontHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
+        "confirmpassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "emailAddressHint":
             MessageLookupByLibrary.simpleMessage("Email Address"),
         "favourite": MessageLookupByLibrary.simpleMessage("Favourite"),
+        "phno": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "firstName": MessageLookupByLibrary.simpleMessage("First Name"),
@@ -106,6 +109,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "youHaveAnAlreadyAccount": MessageLookupByLibrary.simpleMessage(
             "You have an already account?"),
         "yourEmail": MessageLookupByLibrary.simpleMessage("Your Email"),
-        "yourName": MessageLookupByLibrary.simpleMessage("Your Name")
+        "getstarted": MessageLookupByLibrary.simpleMessage("Get Started"),
+        "yourName": MessageLookupByLibrary.simpleMessage("Your Name"),
+        "splashdata": MessageLookupByLibrary.simpleMessage("Oue Meal Plans are cooked with Love & Portioned to suit your body , fitness goals and taste buds"),
+        "mealplan": MessageLookupByLibrary.simpleMessage("MEAL PLANS FOR BUSY PEOPLE")
       };
 }

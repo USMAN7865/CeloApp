@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_diet_tips/Appetotor/Screens/Auth/SignInPage.dart';
 import 'package:flutter_diet_tips/Appetotor/customWidget/videowidget.dart';
+import 'package:flutter_diet_tips/generated/l10n.dart';
 import 'package:flutter_diet_tips/util/ConstantData.dart';
+
+import 'package:flutter_localizations/flutter_localizations.dart';
+import '../../customWidget/language.dart';
 
 class MenuFrame extends StatelessWidget {
   PageController pageController = PageController();
@@ -41,7 +45,7 @@ class MenuFrame extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: primaryColor, width: 2)),
                 child: Text(
-                  "Sign IN".toUpperCase(),
+                  S.of(context).signIn,
                   style: TextStyle(color: primaryColor),
                 ),
               ),
@@ -64,7 +68,7 @@ class MenuFrame extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'MEAL PLANS FOR BUSY PEOPLE',
+                        S.of(context).mealplan,
                         style: TextStyle(
                             color: white,
                             fontWeight: FontWeight.bold,
@@ -78,7 +82,7 @@ class MenuFrame extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Oue Meal Plans are cooked with Love & Portioned to suit your body , fitness goals and taste buds',
+                        S.of(context).splashdata,
                         maxLines: 3,
                         style: TextStyle(
                             color: white,
@@ -111,7 +115,7 @@ class MenuFrame extends StatelessWidget {
                           width: double.infinity,
                           decoration: BoxDecoration(color: primaryColor),
                           child: Text(
-                            "Get Started",
+                            S.of(context).getstarted,
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
@@ -373,96 +377,11 @@ class MenuFrame extends StatelessWidget {
                               )),
                           IconButton(
                               onPressed: () {
-                                final action = CupertinoActionSheet(
-                                  message: Text(
-                                    'Choose your Country',
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                  actions: <Widget>[
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.white),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12)),
-                                              height: 70,
-                                              child: CupertinoActionSheetAction(
-                                                child: Column(
-                                                  children: [
-                                                    Expanded(
-                                                        flex: 2,
-                                                        child: Icon(
-                                                            Icons.language)),
-                                                    Expanded(
-                                                      child: Text(
-                                                        'Arabic',
-                                                        style: TextStyle(
-                                                            fontSize: 12,
-                                                            color:
-                                                                Colors.white),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                isDefaultAction: true,
-                                                onPressed: () {},
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.white),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12)),
-                                              height: 70,
-                                              child: CupertinoActionSheetAction(
-                                                child: Column(
-                                                  children: [
-                                                    Expanded(
-                                                        flex: 2,
-                                                        child: Icon(
-                                                            Icons.language)),
-                                                    Expanded(
-                                                      child: Text(
-                                                        'English',
-                                                        style: TextStyle(
-                                                            fontSize: 12,
-                                                            color:
-                                                                Colors.white),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                isDefaultAction: true,
-                                                onPressed: () {},
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                );
-
-                                showCupertinoModalPopup(
-                                    context: context,
-                                    builder: (context) => action);
+                               
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) => const Languages());
+            
                               },
                               icon: Icon(
                                 Icons.language,

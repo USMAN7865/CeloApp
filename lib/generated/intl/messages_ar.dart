@@ -27,21 +27,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "bmi": MessageLookupByLibrary.simpleMessage("BMI"),
         "bmiCalculator": MessageLookupByLibrary.simpleMessage("BMI Calculator"),
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
+        "createaccount": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "cm": MessageLookupByLibrary.simpleMessage("cm"),
         "continueText": MessageLookupByLibrary.simpleMessage("Continue"),
         "daysDiet": MessageLookupByLibrary.simpleMessage("7 Days Diet"),
         "dishes": MessageLookupByLibrary.simpleMessage("Dishes"),
         "dontHaveAnAccount":
-            MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
+            MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
         "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
         "emailAddressHint":
             MessageLookupByLibrary.simpleMessage("Email Address"),
         "favourite": MessageLookupByLibrary.simpleMessage("Favourite"),
+        "confirmpassword": MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "firstName": MessageLookupByLibrary.simpleMessage("First Name"),
         "forgotPassword":
-            MessageLookupByLibrary.simpleMessage("Forgot Password?"),
+            MessageLookupByLibrary.simpleMessage("هل نسيت كلمة السر؟"),
         "ft": MessageLookupByLibrary.simpleMessage("ft"),
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "gladToMeetnyouAgain":
@@ -64,7 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "nightMode": MessageLookupByLibrary.simpleMessage("اسمك"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "or": MessageLookupByLibrary.simpleMessage("Or"),
-        "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
         "pleaseSelectYourGender":
@@ -83,7 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "share": MessageLookupByLibrary.simpleMessage("Share"),
         "signIn": MessageLookupByLibrary.simpleMessage("اسمك"),
-        "signInNow": MessageLookupByLibrary.simpleMessage("اسمك"),
+        "signInNow": MessageLookupByLibrary.simpleMessage("اشتراك"),
         "signUp": MessageLookupByLibrary.simpleMessage("اسمك"),
         "signUpAndnstaringWorkout": MessageLookupByLibrary.simpleMessage(
             "Sign up and\nstarting workout"),
@@ -104,8 +106,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "whatIsYourWeight":
             MessageLookupByLibrary.simpleMessage("What is your weight?"),
         "youHaveAnAlreadyAccount": MessageLookupByLibrary.simpleMessage(
-            "You have an already account?"),
-        "yourEmail": MessageLookupByLibrary.simpleMessage("Your Email"),
-        "yourName": MessageLookupByLibrary.simpleMessage("اسمك")
+            "لديك حساب بالفعل؟"),
+        "yourEmail": MessageLookupByLibrary.simpleMessage("بريدك الالكتروني"),
+        "getstarted": MessageLookupByLibrary.simpleMessage("البدء"),
+        "yourName": MessageLookupByLibrary.simpleMessage("اسمك"),
+        "phno": MessageLookupByLibrary.simpleMessage("رقم التليفون"),
+        "mealplan": MessageLookupByLibrary.simpleMessage("خطط الوجبات للأشخاص المشغولين"),
+        "splashdata": MessageLookupByLibrary.simpleMessage("تم إعداد خطط وجبات Oue مع Love & Portioned لتناسب جسمك وأهداف اللياقة البدنية وذوقك")
       };
 }

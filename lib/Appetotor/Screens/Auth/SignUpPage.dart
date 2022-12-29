@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_diet_tips/Appetotor/Config/api_Service.dart';
 import 'package:flutter_diet_tips/Appetotor/Config/config.dart';
+import 'package:flutter_diet_tips/Appetotor/Provider/languageprovider.dart';
 import 'package:flutter_diet_tips/Appetotor/customWidget/utils.dart';
 import 'package:flutter_diet_tips/util/ConstantData.dart';
 import 'package:flutter_diet_tips/util/ConstantWidget.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_diet_tips/util/SizeConfig.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../../../PhoneVerification.dart';
 import 'SignInPage.dart';
@@ -118,7 +120,7 @@ class _SignUpPage extends State<SignUpPage> {
                   horizontal: getScreenPercentSize(context, 2.5)),
               child: ListView(
                 children: [
-                  getTextWidget("Create Account!", textColor, TextAlign.left,
+                  getTextWidget(S.of(context).createaccount, textColor,context.read<ChangeLanguageProvider>().currentLocale.languageCode == 'en' ? TextAlign.left:TextAlign.right,
                       FontWeight.bold, getScreenPercentSize(context, 4.2)),
                   SizedBox(
                     height: getScreenPercentSize(context, 2.5),
@@ -198,7 +200,7 @@ class _SignUpPage extends State<SignUpPage> {
                           // ),
 
                           child:
-                              getTextFiled("Phone Number", myController, false),
+                              getTextFiled(S.of(context).phno, myController, false),
                           // child: TextField(
                           //   // controller: myController,
                           //   onChanged: (value) async {
@@ -240,7 +242,7 @@ class _SignUpPage extends State<SignUpPage> {
                   getTextFiled(
                       S.of(context).password, textPasswordController, true),
                   getTextFiled(
-                      "Confirm  Password", textConfirmPasswordController, true),
+                      S.of(context).confirmpassword, textConfirmPasswordController, true),
 
                   // getPasswordTextFiled(
                   //     context, S.of(context).password, textPasswordController),

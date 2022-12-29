@@ -80,6 +80,34 @@ class S {
     );
   }
 
+  /// `Create Account`
+  String get createaccount {
+    return Intl.message(
+      'Create Account',
+      name: 'createaccount',
+      desc: '',
+      args: [],
+    );
+  }
+  /// `Confirm Password`
+  String get confirmpassword {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmpassword',
+      desc: '',
+      args: [],
+    );
+  }
+  /// `Phone Number`
+  String get phno {
+    return Intl.message(
+      'Phone Number',
+      name: 'phno',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Health Tips`
   String get healthTips {
     return Intl.message(
@@ -620,11 +648,39 @@ class S {
     );
   }
 
+
+  String get splashdata {
+    return Intl.message(
+      'Oue Meal Plans are cooked with Love & Portioned to suit your body , fitness goals and taste buds',
+      name: 'splashdata',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign In`
   String get signIn {
     return Intl.message(
       'Sign In',
       name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
+  /// `MEAL PLANS FOR BUSY PEOPLE`
+  String get mealplan {
+    return Intl.message(
+      'MEAL PLANS FOR BUSY PEOPLE',
+      name: 'mealplan',
+      desc: '',
+      args: [],
+    );
+  }
+  /// `Get Started`
+  String get getstarted {
+    return Intl.message(
+      'Get Started',
+      name: 'getstarted',
       desc: '',
       args: [],
     );

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_diet_tips/Appetotor/Provider/languageprovider.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dio/dio.dart';
@@ -55,32 +56,40 @@ class _SignInPage extends State<SignInPage> {
   Future<UserData> googleLoginResponse() async {
     String url =
         'https://diet.appetitor.app/Celo/api/login/callback?provider=google&access_provider_token=$usertoken';
-
-    //click on google sign in. Get accessToken from google through googlesignin
-
-    //Send accessToken to socialite in backend to request/create user data
-
+ 
     GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
     if (googleSignInAccount == null) {
       print('Google Signin ERROR! googleAccount: null!');
     }
     GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount!.authentication;
-
-    //this is user access token from google that is retrieved with the plugin
+        await googleSignInAccount!.authentication; 
     print("User Access Token: ${googleSignInAuthentication.accessToken}");
-    String? accessToken = googleSignInAuthentication.accessToken;
-
-    setState(() {
-      print(accessToken);
-      usertoken = accessToken;
-    });
-
-    //make http request to the laravel backend
-    final response = await http.post(Uri.parse(url),
-        body: json.encode({"token": accessToken}),
+    
+ 
+    final response = await http.post(
+        Uri.parse(
+            'https://diet.appetitor.app/Celo/api/login/callback?provider=google&access_provider_token=${googleSignInAuthentication.accessToken}'),
+        body: json.encode({"token": googleSignInAuthentication.accessToken}),
         headers: {"Content-Type": "application/json"});
     if (response.statusCode == 200 || response.statusCode == 422) {
+      var responsedata = json.decode(response.body);
+      //  print(response.statusCode);
+      bool isFirst = false;
+
+      // print("User token is ${responsedata['data']['token'].toString()}");
+      // print("User token is ${responsedata['data']['name'].toString()}");
+      // print(responsedata['data']['name'].toString());
+      // print(responsedata['data']['u_id'].toString());
+
+      // Utils.flushSucessMessages("Succesfully Login", context);
+      // SharedPreferences localStorage = await SharedPreferences.getInstance();
+      // localStorage.setString('token', responsedata['data']['token'].toString());
+      // localStorage.setString('name', responsedata['data']['name'].toString());
+      // localStorage.setString('id', responsedata['data']['u_id'].toString());
+      // context
+      //     .read<GetUserDataProvider>()
+      //     .setUserId(responsedata['data']['u_id'].toString());
+
       return UserData.fromJson(
         json.decode(response.body), // {'message':'Google signin successful'}
       );
@@ -120,7 +129,7 @@ class _SignInPage extends State<SignInPage> {
                   horizontal: getScreenPercentSize(context, 2.5)),
               child: ListView(
                 children: [
-                  getTextWidget(S.of(context).signIn, textColor, TextAlign.left,
+                  getTextWidget(S.of(context).signIn, textColor, context.read<ChangeLanguageProvider>().currentLocale.languageCode == 'en' ? TextAlign.left:TextAlign.right,
                       FontWeight.bold, getScreenPercentSize(context, 4.2)),
                   SizedBox(
                     height: getScreenPercentSize(context, 2.5),
@@ -334,19 +343,22 @@ class _SignInPage extends State<SignInPage> {
       try {
         String url =
             'https://diet.appetitor.app/Celo/api/user/cal/${responsedata['data']['u_id'].toString()}';
-        var response = await Dio().get(url,
+        var response = await  await http.get(
+      Uri.parse(url), 
+    );
+      var responsedatas = json.decode(response.body);
+
+      print(response.body);
+        
+        
+        
+         Dio().get(url,
             options: Options(headers: {
               HttpHeaders.contentTypeHeader: "application/json",
             }));
         if (response.statusCode == 200) {
-          userdetails = UserData.fromJson(response.data);
-        }
-      } on DioError catch (e) {
-        print(e.response);
-      }
 
-      if (userdetails!.data![0].calories == null &&
-          userdetails.data![0].fats == null) {
+          if (responsedatas['data'].isEmpty ) {
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -359,6 +371,14 @@ class _SignInPage extends State<SignInPage> {
               builder: (context) => HomePage(),
             ));
       }
+        
+          //userdetails = UserData.fromJson(response.body);
+        }
+      } on DioError catch (e) {
+        print(e.response);
+      }
+
+      
     } else {
       Utils.flushBarErrorMessages("Login Failed", context);
       setState(() {
